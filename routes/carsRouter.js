@@ -7,16 +7,10 @@ const router = express.Router();
 //GET
 router.get('/', (request, responce) => {
   db.select('*').from("cars")
-    .then(cars => {
-      responce.json(cars);
-    })
+    .then(cars => { responce.json(cars); })
     .catch( error => {
       console.log(error);
-      responce.status(500).json(
-        {
-          error: "Get Failed."
-        }
-      )
+      responce.status(500).json( {error: "Get Failed."} )
     })
 });
 
@@ -28,52 +22,32 @@ router.post('/', (request, responce) => {
       .then(acc => { responce.json(acc); })
       .catch( error => {
         console.log(error);
-        responce.status(500).json(
-          {
-            error: "Where by ID Failed."
-          }
-        )
+        responce.status(500).json( {error: "Where by ID Failed."} )
       })
     })
     .catch( error => {
       console.log(error);
-      responce.status(500).json(
-        {
-          error: "Post Failed."
-        }
-      )
+      responce.status(500).json( {error: "Post Failed."} )
     })
 });
 
 //PUT
 router.put('/:id', (request, responce) => {
   db("cars").where({ id: request.params.id }).update(request.body)
-    .then(numUpdated => {
-      responce.json(numUpdated);
-    })
+    .then(numUpdated => { responce.json(numUpdated); })
     .catch( error => {
       console.log(error);
-      responce.status(500).json(
-        {
-          error: "PUT Failed."
-        }
-      )
+      responce.status(500).json( {error: "PUT Failed."} )
     })
 });
 
 //DEL
 router.delete('/:id', (request, responce) => {
   db("cars").where({ id: request.params.id }).del()
-    .then(numRemoved => {
-      responce.json(numRemoved);
-    })
+    .then(numRemoved => { responce.json(numRemoved); })
     .catch( error => {
       console.log(error);
-      responce.status(500).json(
-        {
-          error: "PUT Failed."
-        }
-      )
+      responce.status(500).json( {error: "PUT Failed."} )
     })
 });
 
