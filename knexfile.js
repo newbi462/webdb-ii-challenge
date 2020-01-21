@@ -13,6 +13,9 @@ module.exports = {
     migrations: {
         directory: "./migrations",
     },
+    seeds: {
+        directory: "./seeds",
+    },//will seeds run all the JS files in this dir?
   },
 
   staging: {
