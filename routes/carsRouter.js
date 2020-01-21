@@ -21,7 +21,29 @@ router.get('/', (request, responce) => {
 });
 
 //POST
-
+router.post('/', (request, responce) => {
+  db("cars").insert(request.body)
+    .then(idOfAdded => {
+      db("cars").where({id:idOfAdded[0]})
+      .then(acc => { responce.json(acc); })
+      .catch( error => {
+        console.log(error);
+        responce.status(500).json(
+          {
+            error: "Where by ID Failed."
+          }
+        )
+      })
+    })
+    .catch( error => {
+      console.log(error);
+      responce.status(500).json(
+        {
+          error: "Post Failed."
+        }
+      )
+    })
+});
 
 //PUT
 
